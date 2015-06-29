@@ -59,4 +59,4 @@ function getCharacteristicsList() {
     }, []);
 }
 
- console.log("code lives at https://github.com/itsjoesullivan/mealgame");
+console.log("code lives at https://github.com/itsjoesullivan/mealgame");
