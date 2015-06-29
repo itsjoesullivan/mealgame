@@ -9,4 +9,3 @@ git add build/script.js
 git commit -m "new build"
 git push origin gh-pages
 git checkout master
-rm -r build
