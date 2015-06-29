@@ -42,9 +42,6 @@ module.exports = React.createClass({displayName: "exports",
 
 },{"./Characteristic.jsx":1,"./Guess.jsx":3}],3:[function(require,module,exports){
 module.exports = React.createClass({displayName: "exports",
-  getInitialState: function() {
-    return {};
-  },
   render: function() {
     if (typeof this.props.score === 'number') {
       return (
@@ -64,26 +61,32 @@ module.exports = React.createClass({displayName: "exports",
 
 
 },{}],4:[function(require,module,exports){
+// Choices made by visitor
 window.preferences = {};
+
+// Something to trigger/listen to
 window.emitter = new EventEmitter();
+
 var Game = require('./components/Game.jsx');
+var game = React.render(React.createElement(Game, {characteristics: getCharacteristicsList(), preferences: preferences}), document.getElementById('container'));
+
+emitter.on('change', function() {
+  game.setState(makeGuess(preferences));
+});
 
 /**
  * Return the best restaurant match based on 
  * preferences.
  */
 function makeGuess(preferences) {
-  var matches = [];
-  var matches = options.map(function(option) {
+  return options.map(function(option) {
     return {
       name: option.name,
       score: score(preferences, option.characteristics)
     }
-  });
-  var bestMatch = _.sortBy(matches, function(match) {
-    return match.score;
+  }).sort(function(a, b) {
+    return a.score > b.score;
   })[0];
-  return bestMatch;
 }
 
 /**
@@ -93,9 +96,9 @@ function makeGuess(preferences) {
 function score(preferences, restaurant) {
   var total = 0;
   var matchCount = 0;
-  _.each(preferences, function(val, key) {
+  Object.keys(preferences).forEach(function(key) {
     if (restaurant[key]) {
-      total += Math.abs(val - restaurant[key]);
+      total += Math.abs(preferences[key] - restaurant[key]);
       matchCount++;
     }
   });
@@ -107,22 +110,17 @@ function score(preferences, restaurant) {
  * present in the meal choices, e.g. how "spicy"
  */
 function getCharacteristicsList() {
-  var characteristics = [];
-  options.forEach(function(option) {
-    _.each(option.characteristics, function(val, key) {
-      if (characteristics.indexOf(key) === -1) {
-        characteristics.push(key);
+  return options
+    .reduce(function(list, restaurant) {
+      return list.concat(Object.keys(restaurant.characteristics));
+    }, [])
+    .reduce(function(list, characteristicName) {
+      if (list.indexOf(characteristicName) === -1) {
+        list.push(characteristicName);
       }
-    });
-  });
-  return characteristics;
+      return list;
+    }, []);
 }
-
-var game = React.render(React.createElement(Game, {characteristics: getCharacteristicsList(), preferences: preferences}), document.getElementById('container'));
-
-emitter.on('change', function() {
-  game.setState(makeGuess(preferences));
-});
 
 
 },{"./components/Game.jsx":2}]},{},[4]);
