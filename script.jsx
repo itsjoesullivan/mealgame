@@ -1,6 +1,15 @@
+// Choices made by visitor
 window.preferences = {};
+
+// Something to trigger/listen to
 window.emitter = new EventEmitter();
+
 var Game = require('./components/Game.jsx');
+var game = React.render(<Game characteristics={getCharacteristicsList()} preferences={preferences} />, document.getElementById('container'));
+
+emitter.on('change', function() {
+  game.setState(makeGuess(preferences));
+});
 
 /**
  * Return the best restaurant match based on 
@@ -51,9 +60,3 @@ function getCharacteristicsList() {
   });
   return characteristics;
 }
-
-var game = React.render(<Game characteristics={getCharacteristicsList()} preferences={preferences} />, document.getElementById('container'));
-
-emitter.on('change', function() {
-  game.setState(makeGuess(preferences));
-});
