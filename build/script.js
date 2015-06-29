@@ -79,13 +79,14 @@ emitter.on('change', function() {
  * preferences.
  */
 function makeGuess(preferences) {
-  return options.map(function(option) {
+  return _(options.map(function(option) {
     return {
       name: option.name,
       score: score(preferences, option.characteristics)
     }
-  }).sort(function(a, b) {
-    return a.score > b.score;
+  })).sortBy(function(restaurant) {
+    console.log('sort');
+    return restaurant.score;
   })[0];
 }
 
@@ -121,6 +122,8 @@ function getCharacteristicsList() {
       return list;
     }, []);
 }
+
+console.log("code lives at https://github.com/itsjoesullivan/mealgame");
 
 
 },{"./components/Game.jsx":2}]},{},[4]);
