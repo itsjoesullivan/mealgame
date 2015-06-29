@@ -22,7 +22,6 @@ function makeGuess(preferences) {
       score: score(preferences, option.characteristics)
     }
   })).sortBy(function(restaurant) {
-    console.log('sort');
     return restaurant.score;
   })[0];
 }
