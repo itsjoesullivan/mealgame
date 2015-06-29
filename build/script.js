@@ -79,13 +79,13 @@ emitter.on('change', function() {
  * preferences.
  */
 function makeGuess(preferences) {
-  return options.map(function(option) {
+  return _(options.map(function(option) {
     return {
       name: option.name,
       score: score(preferences, option.characteristics)
     }
-  }).sort(function(a, b) {
-    return a.score > b.score;
+  })).sortBy(function(restaurant) {
+    return restaurant.score;
   })[0];
 }
 
