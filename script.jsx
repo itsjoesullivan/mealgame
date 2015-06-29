@@ -58,3 +58,5 @@ function getCharacteristicsList() {
       return list;
     }, []);
 }
+
+console.log("code lives at https://github.com/itsjoesullivan/mealgame");
