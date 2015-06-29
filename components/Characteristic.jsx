@@ -9,7 +9,7 @@ module.exports = React.createClass({
     );
   },
   onChange: function(e) {
-    window.choices[this.props.name] = parseInt(e.target.value);
+    preferences[this.props.name] = parseInt(e.target.value);
     emitter.trigger('change');
   }
 });

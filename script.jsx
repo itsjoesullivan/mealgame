@@ -1,14 +1,17 @@
-window.choices = {};
+window.preferences = {};
 window.emitter = new EventEmitter();
+var Game = require('./components/Game.jsx');
 
-var App = require('./components/App.jsx');
-
-function makeGuess(choices) {
+/**
+ * Return the best restaurant match based on 
+ * preferences.
+ */
+function makeGuess(preferences) {
   var matches = [];
   var matches = options.map(function(option) {
     return {
       name: option.name,
-      score: score(choices, option.characteristics)
+      score: score(preferences, option.characteristics)
     }
   });
   var bestMatch = _.sortBy(matches, function(match) {
@@ -17,18 +20,26 @@ function makeGuess(choices) {
   return bestMatch;
 }
 
-function score(a, b) {
+/**
+ * Return an integer score (lower better)
+ * that is the difference between 
+ */
+function score(preferences, restaurant) {
   var total = 0;
   var matchCount = 0;
-  _.each(a, function(val, key) {
-    if (b[key]) {
-      total += Math.abs(val - b[key]);
+  _.each(preferences, function(val, key) {
+    if (restaurant[key]) {
+      total += Math.abs(val - restaurant[key]);
       matchCount++;
     }
   });
   return total;
 }
 
+/**
+ * Get a list of the names of characteristics
+ * present in the meal choices, e.g. how "spicy"
+ */
 function getCharacteristicsList() {
   var characteristics = [];
   options.forEach(function(option) {
@@ -41,8 +52,8 @@ function getCharacteristicsList() {
   return characteristics;
 }
 
-var game = React.render(<App characteristics={getCharacteristicsList()} choices={choices} />, document.getElementById('container'));
+var game = React.render(<Game characteristics={getCharacteristicsList()} preferences={preferences} />, document.getElementById('container'));
 
 emitter.on('change', function() {
-  game.setState(makeGuess(window.choices));
+  game.setState(makeGuess(preferences));
 });
