@@ -1,7 +1,4 @@
 module.exports = React.createClass({
-  getInitialState: function() {
-    return {};
-  },
   render: function() {
     if (typeof this.props.score === 'number') {
       return (
