@@ -123,6 +123,7 @@ function getCharacteristicsList() {
 }
 
 console.log("code lives at https://github.com/itsjoesullivan/mealgame");
+// test
 
 
 },{"./components/Game.jsx":2}]},{},[4]);
