@@ -1,3 +1,11 @@
+/**
+ * List of meal options along with their characteristics.
+ *
+ * All characteristics should make sense on a log 0-10 scale.
+ * For example, {hotness: 10} is equal to the temperature
+ * at the center of the sun, whereas {hotness:0} is so cold
+ * that electrons would stop circling their atomic nuclei.
+ */
 window.options = [
   {
     name: "Chipotle",
