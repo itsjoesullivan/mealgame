@@ -30,6 +30,14 @@ window.options = [
       spicy: 1,
       wet: 6
     }
+  },
+  {
+    name: "Sushi",
+    characteristics: {
+      meaty: 7,
+      spicy: 5,
+      wet: 5
+    }
   }
   /*
   {
