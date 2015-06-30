@@ -6,16 +6,12 @@ module.exports = React.createClass({
     return {};
   },
   render: function() {
-    var rows = [];
-    this.props.characteristics.forEach(function(characteristic) {
-      rows.push(<Characteristic name={characteristic} />);
-    });
-    return (
-      <div>
-        <h1>Mealgame</h1>
-        {rows}
-        <Guess name={this.state.name} score={this.state.score} />
-      </div>
-    );
+    return <div>
+      <h1>Mealgame</h1>
+      {this.props.characteristics.map(function(characteristic) {
+        return <Characteristic name={characteristic} />
+      })}
+      <Guess name={this.state.name} score={this.state.score} />
+    </div>
   }
 });
