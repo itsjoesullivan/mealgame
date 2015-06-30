@@ -1,13 +1,11 @@
 (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
 module.exports = React.createClass({displayName: "exports",
   render: function() {
-    return (
-      React.createElement("div", null, 
-        React.createElement("label", null, this.props.name), 
-        React.createElement("br", null), 
-        React.createElement("input", {type: "range", min: "0", max: "10", step: "1", onChange: this.onChange})
-      )
-    );
+    return React.createElement("div", null, 
+      React.createElement("label", null, this.props.name), 
+      React.createElement("br", null), 
+      React.createElement("input", {type: "range", min: "0", max: "10", step: "1", onChange: this.onChange})
+    )
   },
   onChange: function(e) {
     preferences[this.props.name] = parseInt(e.target.value);
@@ -25,17 +23,13 @@ module.exports = React.createClass({displayName: "exports",
     return {};
   },
   render: function() {
-    var rows = [];
-    this.props.characteristics.forEach(function(characteristic) {
-      rows.push(React.createElement(Characteristic, {name: characteristic}));
-    });
-    return (
-      React.createElement("div", null, 
-        React.createElement("h1", null, "Mealgame"), 
-        rows, 
-        React.createElement(Guess, {name: this.state.name, score: this.state.score})
-      )
-    );
+    return React.createElement("div", null, 
+      React.createElement("h1", null, "Mealgame"), 
+      this.props.characteristics.map(function(characteristic) {
+        return React.createElement(Characteristic, {name: characteristic})
+      }), 
+      React.createElement(Guess, {name: this.state.name, score: this.state.score})
+    )
   }
 });
 
@@ -44,17 +38,13 @@ module.exports = React.createClass({displayName: "exports",
 module.exports = React.createClass({displayName: "exports",
   render: function() {
     if (typeof this.props.score === 'number') {
-      return (
-        React.createElement("div", null, 
-          "You should eat: ", this.props.name
-        )
-      );
+      return React.createElement("div", null, 
+        "You should eat: ", this.props.name
+      )
     } else {
-      return (
-        React.createElement("div", null, 
-          "No guess yet!"
-        )
-      );
+      return React.createElement("div", null, 
+        "No guess yet!"
+      )
     }
   }
 });
