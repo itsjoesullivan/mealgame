@@ -6,8 +6,7 @@
  * at the center of the sun, whereas {hotness:0} is so cold
  * that electrons would stop circling their atomic nuclei.
  */
-var global = (typeof window !== 'undefined') ? window : module.exports;
-global.restaurants = [
+module.exports = [
   {
     name: "Chipotle",
     characteristics: {

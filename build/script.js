@@ -108,10 +108,66 @@ module.exports = function score(preferences, restaurant) {
 
 
 },{}],7:[function(require,module,exports){
+/**
+ * List of meal options along with their characteristics.
+ *
+ * All characteristics should make sense on a log 0-10 scale.
+ * For example, {hotness: 10} is equal to the temperature
+ * at the center of the sun, whereas {hotness:0} is so cold
+ * that electrons would stop circling their atomic nuclei.
+ */
+module.exports = [
+  {
+    name: "Chipotle",
+    characteristics: {
+      spicy: 6,
+      meaty: 6,
+      wet: 5
+    }
+  },
+  {
+    name: "Chop't",
+    characteristics: {
+      meaty: 3,
+      spicy: 4,
+      wet: 7
+    }
+  },
+  {
+    name: "Shake Shack",
+    characteristics: {
+      meaty: 9,
+      spicy: 1,
+      wet: 6
+    }
+  },
+  {
+    name: "Sushi",
+    characteristics: {
+      meaty: 7,
+      spicy: 5,
+      wet: 5
+    }
+  }
+  /*
+  {
+    name: "Iris Cafe",
+    characteristics: {
+      freshness: 6,
+      creativity: 4
+    }
+  }
+  */
+];
+
+
+},{}],8:[function(require,module,exports){
 // Choices made by visitor
 window.preferences = {};
 // Something to trigger/listen to
 window.emitter = new EventEmitter();
+
+var restaurants = require('./meal-options');
 
 var makeGuess = require('./lib/makeGuess');
 var getCharacteristicsList = require('./lib/getCharacteristicsList');
@@ -126,4 +182,4 @@ emitter.on('change', function() {
 console.log("code lives at https://github.com/itsjoesullivan/mealgame");
 
 
-},{"./components/Game.jsx":2,"./lib/getCharacteristicsList":4,"./lib/makeGuess":5}]},{},[7]);
+},{"./components/Game.jsx":2,"./lib/getCharacteristicsList":4,"./lib/makeGuess":5,"./meal-options":7}]},{},[8]);
