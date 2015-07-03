@@ -1,5 +1,6 @@
 # Deploy to mealgame.biz
 
+# Run tests
 ./test.sh
 
 # Build to tmp file, then overwrite current build/script.js
