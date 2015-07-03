@@ -51,56 +51,12 @@ module.exports = React.createClass({displayName: "exports",
 
 
 },{}],4:[function(require,module,exports){
-// Choices made by visitor
-window.preferences = {};
-
-// Something to trigger/listen to
-window.emitter = new EventEmitter();
-
-var Game = require('./components/Game.jsx');
-var game = React.render(React.createElement(Game, {characteristics: getCharacteristicsList(), preferences: preferences}), document.getElementById('container'));
-
-emitter.on('change', function() {
-  game.setState(makeGuess(preferences));
-});
-
-/**
- * Return the best restaurant match based on 
- * preferences.
- */
-function makeGuess(preferences) {
-  return _(options.map(function(option) {
-    return {
-      name: option.name,
-      score: score(preferences, option.characteristics)
-    }
-  })).sortBy(function(restaurant) {
-    return restaurant.score;
-  })[0];
-}
-
-/**
- * Return an integer score (lower better)
- * that is the difference between 
- */
-function score(preferences, restaurant) {
-  var total = 0;
-  var matchCount = 0;
-  Object.keys(preferences).forEach(function(key) {
-    if (restaurant[key]) {
-      total += Math.abs(preferences[key] - restaurant[key]);
-      matchCount++;
-    }
-  });
-  return total;
-}
-
 /**
  * Get a list of the names of characteristics
  * present in the meal choices, e.g. how "spicy"
  */
-function getCharacteristicsList() {
-  return options
+module.exports = function getCharacteristicsList(restaurants) {
+  return restaurants
     .reduce(function(list, restaurant) {
       return list.concat(Object.keys(restaurant.characteristics));
     }, [])
@@ -110,9 +66,64 @@ function getCharacteristicsList() {
       }
       return list;
     }, []);
-}
+};
+
+
+},{}],5:[function(require,module,exports){
+var score = require('./score');
+
+/**
+ * Return the best restaurant match based on 
+ * preferences.
+ */
+module.exports = function makeGuess(preferences, restaurants) {
+  return _(restaurants.map(function(restaurant) {
+    return {
+      name: restaurant.name,
+      score: score(preferences, restaurant.characteristics)
+    }
+  })).sortBy(function(restaurant) {
+    return restaurant.score;
+  })[0];
+};
+
+
+},{"./score":6}],6:[function(require,module,exports){
+/**
+ * Return an integer score (lower better)
+ * that is the difference between an individual
+ * restaurant and the visitor's preference
+ */
+module.exports = function score(preferences, restaurant) {
+  var total = 0;
+  var matchCount = 0;
+  Object.keys(preferences).forEach(function(key) {
+    if (restaurant[key]) {
+      total += Math.abs(preferences[key] - restaurant[key]);
+      matchCount++;
+    }
+  });
+  return total;
+};
+
+
+},{}],7:[function(require,module,exports){
+// Choices made by visitor
+window.preferences = {};
+// Something to trigger/listen to
+window.emitter = new EventEmitter();
+
+var makeGuess = require('./lib/makeGuess');
+var getCharacteristicsList = require('./lib/getCharacteristicsList');
+var Game = require('./components/Game.jsx');
+
+var game = React.render(React.createElement(Game, {characteristics: getCharacteristicsList(restaurants), preferences: preferences}), document.getElementById('container'));
+
+emitter.on('change', function() {
+  game.setState(makeGuess(preferences, restaurants));
+});
 
 console.log("code lives at https://github.com/itsjoesullivan/mealgame");
 
 
-},{"./components/Game.jsx":2}]},{},[4]);
+},{"./components/Game.jsx":2,"./lib/getCharacteristicsList":4,"./lib/makeGuess":5}]},{},[7]);
