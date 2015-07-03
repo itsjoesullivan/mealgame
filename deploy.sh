@@ -1,5 +1,7 @@
 # Deploy to mealgame.biz
 
+./test.sh
+
 # Build to tmp file, then overwrite current build/script.js
 mkdir -p build
 browserify -t reactify script.jsx > build/_script.js
