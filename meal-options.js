@@ -6,7 +6,7 @@
  * at the center of the sun, whereas {hotness:0} is so cold
  * that electrons would stop circling their atomic nuclei.
  */
-window.options = [
+window.restaurants = [
   {
     name: "Chipotle",
     characteristics: {

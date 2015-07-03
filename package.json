@@ -17,6 +17,7 @@
   },
   "homepage": "https://github.com/itsjoesullivan/mealgame",
   "dependencies": {
-    "reactify": "^1.1.1"
+    "reactify": "^1.1.1",
+    "underscore": "^1.8.3"
   }
 }
