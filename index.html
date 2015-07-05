@@ -6,7 +6,8 @@
     <meta name="viewport" content="width=device-width">
   </head>
   <body ng-app="mealgameApp">
-    <div id="container">
+    <div id="container" ng-controller="GameCtrl">
+      {{ test }}
       <h1>Mealgame</h1>
       <div>
         <label>label</label>
@@ -18,6 +19,7 @@
       </div>
     </div>
     <script src="node_modules/angular/angular.js"></script>
+    <script src="script.js"></script>
     <script>
       (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
       (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
