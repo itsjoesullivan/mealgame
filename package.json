@@ -1,0 +1,22 @@
+{
+  "name": "mealgame",
+  "version": "1.0.0",
+  "description": "The proven method of arriving at a lunchtime meal decision.",
+  "main": "meal-options.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/itsjoesullivan/mealgame.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/itsjoesullivan/mealgame/issues"
+  },
+  "homepage": "https://github.com/itsjoesullivan/mealgame#readme",
+  "dependencies": {
+    "angular": "^1.4.1"
+  }
+}
