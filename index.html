@@ -7,12 +7,11 @@
   </head>
   <body ng-app="mealgameApp">
     <div id="container" ng-controller="GameCtrl">
-      {{ test }}
       <h1>Mealgame</h1>
-      <div>
-        <label>label</label>
-        <br />
-        <input type="range" min="0" max="10" step="1" />
+      <div ng-repeat="characteristic in getCharacteristicsList()">
+          <label>{{ characteristic }}</label>
+          <br />
+          <input type="range" min="0" max="10" step="1" />
       </div>
       <div>
         <span>No guess yet!</span>
