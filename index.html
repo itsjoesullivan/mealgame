@@ -11,10 +11,13 @@
       <div ng-repeat="characteristic in getCharacteristicsList()">
           <label>{{ characteristic }}</label>
           <br />
-          <input type="range" min="0" max="10" step="1" />
+          <input
+            ng-model="preferences[characteristic]"
+            ng-change="change()"
+            type="range" min="0" max="10" step="1" />
       </div>
       <div>
-        <span>No guess yet!</span>
+        <span ng-bind="guess"></span>
       </div>
     </div>
     <script src="node_modules/angular/angular.js"></script>
