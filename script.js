@@ -1,50 +1,8 @@
 var mealgameApp = angular.module("mealgameApp", []);
-mealgameApp.controller("GameCtrl", ["$scope", "$filter", function ($scope, $filter) {
+mealgameApp.controller("GameCtrl", ["$scope", "$filter", "restaurantsService", function ($scope, $filter, restaurantsService) {
   $scope.guess = "No guess yet!";
   $scope.preferences = {};
-  $scope.restaurants = [
-    {
-      name: "Chipotle",
-      characteristics: {
-        spicy: 6,
-        meaty: 6,
-        wet: 5
-      }
-    },
-    {
-      name: "Chop't",
-      characteristics: {
-        meaty: 3,
-        spicy: 4,
-        wet: 7
-      }
-    },
-    {
-      name: "Shake Shack",
-      characteristics: {
-        meaty: 9,
-        spicy: 1,
-        wet: 6
-      }
-    },
-    {
-      name: "Sushi",
-      characteristics: {
-        meaty: 7,
-        spicy: 5,
-        wet: 5
-      }
-    }
-    /*
-    {
-      name: "Iris Cafe",
-      characteristics: {
-        freshness: 6,
-        creativity: 4
-      }
-    }
-    */
-  ];
+  $scope.restaurants = restaurantsService;
   $scope.score = function(preferences, restaurant) {
     var total = 0;
     var matchCount = 0;
